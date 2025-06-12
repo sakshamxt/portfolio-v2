@@ -3,23 +3,25 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 import dataRoutes from './routes/dataRoutes.js';
+import authRoutes from './routes/authRoutes.js';
 
 
 dotenv.config();
 
 const app = express();
 
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-const PORT = process.env.PORT || 3000;
-
 // Connect to the database
 connectDB();
 
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
 // API routes
 app.use('/api', dataRoutes);
+app.use('/api/auth', authRoutes);
+
+const PORT = process.env.PORT || 3000;
 
 app.get('/', (req, res) => {
     res.send('Welcome to the server!');
