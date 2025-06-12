@@ -16,6 +16,9 @@ import {
   createBlog,
   updateBlog,
   deleteBlog,
+  getPortfolioData,
+  getAdminData
+
 } from '../controllers/dataController.js';
 
 // Configure multer storage for Cloudinary
@@ -31,11 +34,14 @@ const storage = new CloudinaryStorage({
 const upload = multer({ storage: storage });
 
 // --- PUBLIC ROUTES ---
-router.get('/about', getAbout);
-router.get('/projects', getProjects);
-router.get('/blogs', getBlogs);
+// router.get('/about', getAbout);
+// router.get('/projects', getProjects);
+// router.get('/blogs', getBlogs);
+router.get('/', getPortfolioData);
 
 // --- ADMIN PROTECTED ROUTES ---
+
+router.get('/admin/data', protect, getAdminData);
 
 // About Route
 router.put('/about', protect, updateAbout);

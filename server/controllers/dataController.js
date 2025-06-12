@@ -45,7 +45,37 @@ const getBlogs = async (req, res) => {
 };
 
 
+
+// @desc    Get all public data in one call
+// @route   GET /api/
+// @access  Public
+const getPortfolioData = async (req, res) => {
+  try {
+    const about = await About.findOne();
+    const projects = await Project.find().sort({ _id: -1 }); // Sort by newest
+    const blogs = await Blog.find().sort({ _id: -1 });
+    res.json({ about, projects, blogs });
+  } catch (err) { res.status(500).send('Server Error') }
+};
+
+
+
 // Admin API Controller for Data Management
+
+
+// @desc    Get all data for the admin panel
+// @route   GET /api/admin/data
+// @access  Private
+const getAdminData = async (req, res) => {
+  try {
+    const about = await About.findOne();
+    const projects = await Project.find().sort({ _id: -1 });
+    const blogs = await Blog.find().sort({ _id: -1 });
+    res.json({ about, projects, blogs });
+  } catch (err) { res.status(500).send('Server Error') }
+};
+
+
 
 // ABOUT SECTION (Update only)
 
@@ -168,4 +198,4 @@ const deleteBlog = async (req, res) => {
 
 
 
-export { getAbout, getProjects, getBlogs, updateAbout, createProject, updateProject, deleteProject, createBlog, updateBlog, deleteBlog };
+export { getAbout, getProjects, getBlogs, getPortfolioData, getAdminData, updateAbout, createProject, updateProject, deleteProject, createBlog, updateBlog, deleteBlog };
