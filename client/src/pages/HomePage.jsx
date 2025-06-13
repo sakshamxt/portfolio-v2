@@ -232,9 +232,9 @@ const HomePage = () => {
 
           </main>
           {/* Footer Section */}
-        <footer className="text-center text-gray-500 py-8 border-t border-gray-800 mt-16">
-          <p>&copy; {new Date().getFullYear()} Your Name. All Rights Reserved.</p>
-        </footer>
+        <div className='flex items-center justify-center pt-10 py-6'>
+            <h1 className='text-text tracking-[0.01em] text-xs'>&copy; 2025 by Saksham Tyagi. All rights reserved.</h1>
+        </div>
       </div>
     </div>
   );
