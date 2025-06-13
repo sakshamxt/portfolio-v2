@@ -91,7 +91,7 @@ const ProjectManager = ({ projects: initialProjects }) => {
 // -------------------------------------------------------------------
 const BlogManager = ({ blogs: initialBlogs }) => {
     const [blogs, setBlogs] = useState(initialBlogs);
-    const [formData, setFormData] = useState({ title: '', description: '', link: '' });
+    const [formData, setFormData] = useState({ title: '', content: '' });
     const [editingBlogId, setEditingBlogId] = useState(null); // To track which blog we are editing
 
     const handleInputChange = (e) => {
@@ -126,7 +126,7 @@ const BlogManager = ({ blogs: initialBlogs }) => {
     
     const handleEditClick = (blog) => {
         setEditingBlogId(blog._id);
-        setFormData({ title: blog.title, description: blog.description, link: blog.link });
+        setFormData({ title: blog.title, content: blog.content });
     };
     
     const handleDelete = async (id) => {
@@ -141,7 +141,7 @@ const BlogManager = ({ blogs: initialBlogs }) => {
     
     const resetForm = () => {
         setEditingBlogId(null);
-        setFormData({ title: '', description: '', link: '' });
+        setFormData({ title: '', content: '' });
     };
 
     return (
@@ -151,8 +151,7 @@ const BlogManager = ({ blogs: initialBlogs }) => {
             <form onSubmit={handleFormSubmit} className="mb-8 p-4 bg-gray-800 rounded">
                 <h4 className="font-bold mb-4">{editingBlogId ? 'Edit Blog Post' : 'Add New Blog Post'}</h4>
                 <input type="text" name="title" placeholder="Title" value={formData.title} onChange={handleInputChange} className="block w-full bg-gray-700 p-2 rounded mb-2" required />
-                <textarea name="description" placeholder="Description" value={formData.description} onChange={handleInputChange} className="block w-full bg-gray-700 p-2 rounded mb-2" required></textarea>
-                <input type="url" name="link" placeholder="Blog Link (e.g., Medium)" value={formData.link} onChange={handleInputChange} className="block w-full bg-gray-700 p-2 rounded mb-4" required />
+                <textarea name="content" placeholder="Content" value={formData.content} onChange={handleInputChange} className="block w-full bg-gray-700 p-2 rounded mb-2" required></textarea>
                 <div className="flex items-center space-x-4">
                     <button type="submit" className="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded">
                         {editingBlogId ? 'Update Post' : 'Create Post'}
